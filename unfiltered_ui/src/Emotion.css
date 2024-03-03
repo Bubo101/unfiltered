@@ -1,0 +1,33 @@
+/* Emotion.css */
+.emotion-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+  }
+  
+  .emotion-icons {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Adjust the space between icons */
+  }
+  
+  .emo-icon {
+    font-size: 48px; /* Adjust the size of icons */
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+  
+  .smiley:hover {
+    color: green;
+  }
+  
+  .meh:hover {
+    color: yellow;
+  }
+  
+  .sad:hover {
+    color: blue;
+  }
+  

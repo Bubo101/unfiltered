@@ -1,0 +1,120 @@
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #333;
+    color: white;
+    border-radius: 8px;
+    max-width: 600px;
+    margin: auto;
+    position: relative;
+  }
+  
+  .special-message {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px; /* Adjust based on your design */
+  }
+  
+  .chat-icon {
+    font-size: 24px; /* Adjust size as needed */
+    color: #ffa500; /* Fox icon color */
+    margin-right: 8px;
+  }
+  
+  .username {
+    color: #e91e63; /* Bright color for the username */
+    font-weight: bold;
+    border: 1px solid #e91e63; /* Slight border around the username */
+    padding: 5px;
+    border-radius: 8px; /* Optional: adds rounded corners to the border */
+  }
+  
+  .messages {
+    width: 100%;
+    height: 300px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+    background-color: #222;
+    border-radius: 8px;
+    padding: 10px;
+  }
+
+  .chat-window {
+    display: flex;
+    flex-direction: column;
+    background-color: #222; /* Darker than the special message background */
+    border-radius: 16px; /* Rounded corners for the chat window */
+    padding: 10px;
+    height: 500px;
+    margin-bottom: 20px; /* Space between chat window and input area */
+    max-height: 600px; /* Or any other height you prefer */
+    overflow-y: auto; /* Scrollable when content overflows */
+    width: 100%; /* Full width */
+  }
+
+  .message {
+    margin: 10px 0;
+    padding: 5px;
+    border-radius: 8px;
+    max-width: 70%;
+  }
+  
+  .message.user {
+    align-self: flex-end;
+    background-color: #007bff;
+    align-self: flex-end;
+  }
+  
+  .message.friend {
+    align-self: flex-start;
+    background-color: #555;
+    align-self: flex-start;
+  }
+  
+  .chat-input {
+    display: flex;
+    width: 100%;
+  }
+  
+  .chat-input input {
+    flex-grow: 1;
+    padding: 10px;
+    margin-right: 5px;
+    border-radius: 8px;
+    border: none;
+    height: 25px;
+  }
+  
+  .chat-input button,
+  .chat-actions button {
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    margin: 0 10px;
+    height: 50px;
+    cursor: pointer;
+    margin-top: 15px;
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .chat-input button {
+    margin-top: -3px;
+  }
+  .chat-actions button:first-child {
+    background-color: #FFD700; /* Flashy color for CONNECT SOCIALS */
+    color: #000;
+    margin-right: 80px;
+  }
+  
+  .chat-actions button:last-child {
+    background-color: #FF6347; /* Red color for EXIT CHAT */
+    color: #FFF;
+  }
+
+  .chat-actions {
+    display: flex;
+    justify-content: space-between;
+  }
