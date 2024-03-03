@@ -1,0 +1,53 @@
+.social-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.75); /* Darker semi-transparent background */
+  }
+  
+  .social-content {
+    background-color: #333; /* Dark background for content */
+    color: #fff; /* Light text color for dark mode */
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 90%; /* Adjust width */
+    max-width: 500px; /* Maximum width */
+  }
+  
+  .social-icons {
+    margin: 20px 0;
+    color: #fff; /* Ensure icons are visible against dark background */
+  }
+  
+  .s-icon {
+    margin: 0 15px;
+    font-size: 30px; /* Larger icons */
+    cursor: pointer;
+  }
+  
+  .social-actions button {
+    padding: 10px 20px; /* Larger button padding for better clickability */
+    margin: 10px; /* Space between buttons */
+    border: none;
+    border-radius: 5px; /* Rounded corners for buttons */
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  /* Specific styles for Yes and No buttons */
+  .social-actions button:first-child {
+    background-color: #4CAF50; /* Green color for Yes */
+    color: white;
+  }
+  
+  .social-actions button:last-child {
+    background-color: #f44336; /* Red color for No */
+    color: white;
+  }
+  

@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
 import { FaCat } from 'react-icons/fa'; // Importing the cat icon from react-icons
 import './Chat.css';
+import Social from './Social';
 
 function Chat({ emotion }) {
   const [inputMessage, setInputMessage] = useState('');
   const [messages, setMessages] = useState([]);
+  const [initialMessageSent, setInitialMessageSent] = useState(false); // Add this line to track if the initial message is sent
+  const [showSocialPopup, setShowSocialPopup] = useState(false);
+  const [connectionMeter, setConnectionMeter] = useState(0);
+
 
   const squigglyResponses = [
     "Hi there. Today has been a bit rough for me, you know? Just feeling a bit overwhelmed with everything going on.",
@@ -15,27 +20,33 @@ function Chat({ emotion }) {
 
   const handleSendMessage = () => {
     if (inputMessage.trim() !== '') {
-      // Add the user's message to the messages array
-      const updatedMessages = [...messages, { sender: 'User', text: inputMessage }];
-
-      // Determine the index for Squiggly's response based on the updated message list length
-      const squigglyIndex = Math.floor((updatedMessages.length - 1) / 2);
-
-      // Check if it's time for Squiggly to send a message
+      // Immediately add the user's message to the messages array
+      setMessages(currentMessages => [...currentMessages, { sender: 'User', text: inputMessage }]);
+  
+      // Update the connection meter by 10% for the user's message
+      setConnectionMeter(prevMeter => Math.min(100, prevMeter + 10));
+  
+      // Determine the index for Squiggly's response based on the future messages length
+      const futureMessageCount = messages.length + 1; // Including the new user message
+      const squigglyIndex = Math.floor(futureMessageCount / 2);
+  
       if (squigglyIndex < squigglyResponses.length) {
         setTimeout(() => {
-          setMessages([...updatedMessages, { sender: 'Squiggly McWobblepants', text: squigglyResponses[squigglyIndex] }]);
-        }, 500); // Wait half a second to simulate typing
+          setMessages(currentMessages => [...currentMessages, { sender: 'Squiggly McWobblepants', text: squigglyResponses[squigglyIndex] }]);
+          // Update the connection meter by 10% for Squiggly's response inside setTimeout
+          setConnectionMeter(prevMeter => Math.min(100, prevMeter + 10));
+        }, 1000); // 1-second delay for Squiggly's response
       }
-
+  
       setInputMessage(''); // Clear the input field after sending a message
-      setMessages(updatedMessages); // Update state with new message
+      setInitialMessageSent(true); // Mark the initial message as sent
     }
   };
+  
+  
 
   const handleConnect = () => {
-    // Placeholder function for connecting
-    alert('Connect feature is not implemented yet.');
+    setShowSocialPopup(true); // This will now trigger the Social popup to be shown
   };
 
   const handleExit = () => {
@@ -49,12 +60,32 @@ function Chat({ emotion }) {
     }
   };
 
+  const handleConfirmSocialShare = () => {
+    // Logic to handle confirmation
+    setShowSocialPopup(false);
+    alert('Social media information shared!');
+  };
+  
+  const handleCancelSocialShare = () => {
+    setShowSocialPopup(false);
+  };
+  
+
   return (
     <div className="chat-container">
+            <Social
+      isVisible={showSocialPopup}
+      onConfirm={handleConfirmSocialShare}
+      onCancel={handleCancelSocialShare}
+    />
       <div className="special-message">
         <FaCat className="chat-icon" />
         <span className="username">Squiggly McWobblepants</span>&nbsp; is sad today. Cheer them up!
       </div>
+      <div className='m-text'>CONNECTION METER</div>
+      <div className="connection-meter">
+    <div className="meter-fill" style={{ width: `${connectionMeter}%` }}></div>
+  </div>
       <div className="chat-window">
         {messages.map((message, index) => (
           // Remove the sender prefix from the messages
@@ -66,7 +97,7 @@ function Chat({ emotion }) {
       <div className="chat-input">
         <input
           type="text"
-          placeholder="Start by saying how YOUR day is going!"
+          placeholder={!initialMessageSent ? "Start by saying how YOUR day is going!" : ""}
           value={inputMessage}
           onChange={(e) => setInputMessage(e.target.value)}
           onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
